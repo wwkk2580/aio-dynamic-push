@@ -28,7 +28,7 @@ jobs:
 
       - name: Login to Alibaba Cloud Registry
         run: |
-          echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login --username=${{ secrets.ALIYUN_USERNAME }} --password-stdin registry.cn-hangzhou.aliyuncs.com
+          echo "${{ secrets.ALIYUN_PASSWORD }}" | docker login --username=${{ secrets.ALIYUN_USERNAME }} --password-stdin registry.cn-beijing.aliyuncs.com
 
       - name: Build and Push Docker Image
         run: |
