@@ -3,7 +3,7 @@ import json
 from common import util
 from common.logger import log
 from . import PushChannel
-
+from datetime import datetime
 
 class DingtalkBot(PushChannel):
     def __init__(self, config):
@@ -13,6 +13,8 @@ class DingtalkBot(PushChannel):
             log.error(f"【推送_{self.name}】配置不完整，推送功能将无法正常使用")
 
     def push(self, title, content, jump_url=None, pic_url=None, extend_data=None):
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        content_with_time = f"{content} {current_time}" if content else current_time
         push_url = "https://oapi.dingtalk.com/robot/send"
         headers = {
             "Content-Type": "application/json"
@@ -24,7 +26,7 @@ class DingtalkBot(PushChannel):
             "msgtype": "link",
             "link": {
                 "title": title,
-                "text": content,
+                "text": content_with_time,
                 "messageUrl": jump_url
             }
         }
